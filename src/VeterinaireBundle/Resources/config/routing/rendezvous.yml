@@ -1,0 +1,37 @@
+r_index:
+    path:     /
+    defaults: { _controller: "VeterinaireBundle:RendezVous:index" }
+    methods:  GET
+
+r_show:
+    path:     /{id}/show
+    defaults: { _controller: "VeterinaireBundle:RendezVous:show" }
+    methods:  GET
+
+r_new:
+    path:     /new
+    defaults: { _controller: "VeterinaireBundle:RendezVous:new" }
+    methods:  [GET, POST]
+
+r_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "VeterinaireBundle:RendezVous:edit" }
+    methods:  [GET, POST]
+
+r_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "VeterinaireBundle:RendezVous:delete" }
+    methods:  DELETE
+v_index:
+    path:     /listv
+    defaults: { _controller: "VeterinaireBundle:Listveterinaire:index" }
+    methods:  GET
+
+rech_vet:
+    path:     /recherchev
+    defaults: { _controller: "VeterinaireBundle:Listveterinaire:recherche" }
+    methods:  GET
+rech_rdv:
+    path:     /rechercher
+    defaults: { _controller: "VeterinaireBundle:RendezVous:recherche" }
+    methods:  GET

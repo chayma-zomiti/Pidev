@@ -1,0 +1,26 @@
+
+                                    {% for  produit in produits %}
+                                    <div class="col-sm-6 col-md-4 col-lg-4 mb-30">
+                                        <div class="product">
+                                            <span class="tag-sale">Sale!</span>
+                                            <div class="product-thumb">  <a href="{{ asset('productImages/')~ produit.imageproduit}}"    >
+                                                    <img height="200" width="250"
+                                                         alt="img"
+                                                         src="{{ asset('productImages/')~ produit.imageproduit}}"
+                                                    >
+                                                </a>
+
+
+                                                <div class="overlay"></div>
+                                            </div>
+                                            <div class="product-details text-center">
+                                                <a href="{{ path('produit_show', { 'idproduit': produit.idproduit }) }}"><h5 class="product-title">{{ produit.libelleproduit }}</h5></a>
+                                                <div class="star-rating" title="Rated 4.50 out of 5"><span style="width: 90%;">3.50</span></div>
+                                                <div class="price"><del><span class="amount"></span></del><ins><span class="amount">${{ produit.prixproduit }}</span></ins></div>
+                                                <!--<div class="btn-add-to-cart-wrapper">
+                                                    <a class="btn btn-default btn-xs btn-add-to-cart" href="#">Add To Cart</a>
+                                                </div>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}

@@ -28,6 +28,46 @@ class Categorie
      */
     private $nomcategorie;
 
+    /**
+     * @return int
+     */
+    public function getIdcategorie()
+    {
+        return $this->idcategorie;
+    }
+
+    /**
+     * @param int $idcategorie
+     */
+    public function setIdcategorie($idcategorie)
+    {
+        $this->idcategorie = $idcategorie;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNomcategorie()
+    {
+        return $this->nomcategorie;
+    }
+
+    /**
+     * @param string $nomcategorie
+     */
+    public function setNomcategorie($nomcategorie)
+    {
+        $this->nomcategorie = $nomcategorie;
+    }
+
+    /**
+     * @return string
+     */
+    function __toString()
+    {
+        return $this->getNomcategorie();
+    }
+
 
 }
 

@@ -1,0 +1,19 @@
+panier_index:
+    path:     /
+    defaults: { _controller: "UserBundle:Panier:index" }
+    methods:  GET
+
+panier_new:
+    path:     /new/{idprod}/{quantety}
+    defaults: { _controller: "UserBundle:Panier:new" }
+    methods:  [GET, POST]
+
+panier_payment:
+    path:     /{iduser}/success
+    defaults: { _controller: "UserBundle:Panier:success" }
+    methods:  [GET, POST]
+
+panier_delete:
+    path:     /{idproduit}/delete
+    defaults: { _controller: "UserBundle:Panier:delete" }
+    methods:  GET

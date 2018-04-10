@@ -70,6 +70,134 @@ class Servicelist
      */
     private $servicetype;
 
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCreator()
+    {
+        return $this->creator;
+    }
+
+    /**
+     * @param int $creator
+     */
+    public function setCreator($creator)
+    {
+        $this->creator = $creator;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAnimaltype()
+    {
+        return $this->animaltype;
+    }
+
+    /**
+     * @param string $animaltype
+     */
+    public function setAnimaltype($animaltype)
+    {
+        $this->animaltype = $animaltype;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDatedebut()
+    {
+        return $this->datedebut;
+    }
+
+    /**
+     * @param \DateTime $datedebut
+     */
+    public function setDatedebut($datedebut)
+    {
+        $this->datedebut = $datedebut;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDatefin()
+    {
+        return $this->datefin;
+    }
+
+    /**
+     * @param \DateTime $datefin
+     */
+    public function setDatefin($datefin)
+    {
+        $this->datefin = $datefin;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhonenumber()
+    {
+        return $this->phonenumber;
+    }
+
+    /**
+     * @param string $phonenumber
+     */
+    public function setPhonenumber($phonenumber)
+    {
+        $this->phonenumber = $phonenumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getServicetype()
+    {
+        return $this->servicetype;
+    }
+
+    /**
+     * @param string $servicetype
+     */
+    public function setServicetype($servicetype)
+    {
+        $this->servicetype = $servicetype;
+    }
+
 
 }
 

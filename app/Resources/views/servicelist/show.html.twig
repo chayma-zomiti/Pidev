@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <link href="{{ asset('css/colors/theme-skin-lightgreen.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/style-main.css') }}" rel="stylesheet" type="text/css">
+    <!-- Start main-content -->
+    <div class="main-content">
+        <!-- Section: inner-header -->
+        <section class="inner-header divider parallax layer-overlay overlay-white-8" data-bg-img="http://placehold.it/1920x1280">
+            <div class="container pt-60 pb-60">
+                <!-- Section Content -->
+                <div class="section-content">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h2 class="font-28">Details du service</h2>
+                                <ol class="breadcrumb text-center text-black mt-10">
+                                    <li><a href="{{ path('homepage') }}">Acceuil</a></li>
+                                    <li><a href="{{ path('servicelist_index') }}">Liste des services</a></li>
+                                    <li class="active text-theme-colored">{{ servicelist.servicetype }} pour l'utulisateur {{ servicelist.creator }}</li>
+                                </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="job-overview">
+                            {% if (servicelist.datedebut and servicelist.datefin) %}
+                            <dl class="dl-horizontal">
+                                <dt><i class="fa fa-calendar text-theme-colored mt-5 font-15"></i></dt>
+                                <dd>
+                                    <h5 class="mt-0">Date :</h5>
+                                    <p>{{ servicelist.datedebut|date('Y/m/d') }} - {{ servicelist.datefin|date('Y/m/d') }}</p>
+                                </dd>
+                            </dl>
+                            {% endif %}
+                            <dl class="dl-horizontal">
+                                <dt><i class="fa fa-cog text-theme-colored mt-5 font-15"></i></dt>
+                                <dd>
+                                    <h5 class="mt-0">Animale :</h5>
+                                    <p>{{ servicelist.animaltype }}</p>
+                                </dd>
+                            </dl>
+                            <dl class="dl-horizontal">
+                                <dt><i class="fa fa-user text-theme-colored mt-5 font-15"></i></dt>
+                                <dd>
+                                    <h5 class="mt-0">Service:</h5>
+                                    <p>{{ servicelist.servicetype }}</p>
+                                </dd>
+                            </dl>
+                            <dl class="dl-horizontal">
+                                <dt><i class="fa fa-user text-theme-colored mt-5 font-15"></i></dt>
+                                <dd>
+                                    <h5 class="mt-0">Client :</h5>
+                                    <p>{{ servicelist.creator }}</p>
+                                </dd>
+                            </dl>
+
+                            <div class="form-group">
+                                <a class="btn btn-dark mt-20" href="#" onclick="loadXMLDoc()">Apply Now</a>&nbsp;&nbsp;
+                            <input type="text" class="form-control col-md-1" style="width: 50px ; margin-right: 10px ; height: 37px" placeholder="$10" id="prixx">
+                            </div>
+                            <!-- Modal -->
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="icon-box mb-0 p-0">
+                            <a href="#" class="icon icon-gray pull-left mb-0 mr-10">
+                                <i class="pe-7s-users"></i>
+                            </a>
+                            <h3 class="icon-box-title pt-15 mt-0 mb-40">{{ servicelist.servicetype }}</h3>
+                            <hr>
+                            <h5 class="mt-30">Requirments:</h5>
+                            <p class="text-gray">{{ servicelist.description }}</p>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- end main-content -->
+{% endblock %}
+{% block javascripts %}
+    <script>
+        function loadXMLDoc() {
+            var xmlhttp;
+            if (window.XMLHttpRequest) {
+                xmlhttp = new XMLHttpRequest();
+            } else {
+                // code for older browsers
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    alert("Succés");
+                }
+            };
+
+            xmlhttp.open("GET", "{{ url('servicelist_index') }}{{ servicelist.id }}/sms/"+document.getElementById("prixx").value, true);
+            xmlhttp.send();
+        }
+    </script>
+    <script src="{{ asset('js/jquery-2.2.4.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <!-- JS | jquery plugin collection for this theme -->
+    <script src="{{ asset('js/jquery-plugin-collection.js') }}"></script>
+{% endblock %}

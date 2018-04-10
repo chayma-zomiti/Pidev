@@ -1,0 +1,34 @@
+servicelist_index:
+    path:     /
+    defaults: { _controller: "UserBundle:Servicelist:index" }
+    methods:  GET
+
+servicelist_show:
+    path:     /{id}/show
+    defaults: { _controller: "UserBundle:Servicelist:show" }
+    methods:  GET
+
+servicelist_new:
+    path:     /new
+    defaults: { _controller: "UserBundle:Servicelist:new" }
+    methods:  [GET, POST]
+
+servicelist_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "UserBundle:Servicelist:edit" }
+    methods:  [GET, POST]
+
+servicelist_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "UserBundle:Servicelist:delete" }
+    methods:  DELETE
+
+servicelist_sms:
+    path:     /{id}/sms/{prix}
+    defaults: { _controller: "UserBundle:Servicelist:SMS" }
+    methods:  [GET, POST]
+
+servicelist_Search:
+    path:     /recherche/{libelle}
+    defaults: { _controller: "UserBundle:Servicelist:Search" }
+    methods:  GET

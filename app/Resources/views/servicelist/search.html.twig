@@ -1,0 +1,18 @@
+{% for servicelist in servicelists %}
+    <div class="col-sm-4" >
+        <div class="icon-box iconbox-border iconbox-theme-colored p-40" >
+            <a style="margin-top: 10px" href="{{ path('servicelist_show', { 'id': servicelist.id }) }}" class="icon icon-gray icon-bordered icon-border-effect effect-flat">
+                <i class="pe-7s-clock"></i>
+            </a>
+            <h5 class="icon-box-title">{{ servicelist.servicetype }}</h5>
+            <p class="text-gray">{{ servicelist.description }}</p>
+            <a class="btn btn-dark btn-sm mt-15" href="{{ path('servicelist_show', { 'id': servicelist.id }) }}" style="margin-bottom: 10px">Apply Now</a>
+            {% if app.user %}
+
+            {% if app.user.id == servicelist.creator %}
+                <a class="btn btn-dark btn-sm mt-15" href="{{ path('servicelist_edit', { 'id': servicelist.id }) }}" style="margin-bottom: 10px">Edit / Delete</a>
+            {% endif %}
+                {% endif %}
+        </div>
+    </div>
+{% endfor %}

@@ -1,0 +1,7 @@
+veterinaire_r:
+    resource: "@VeterinaireBundle/Resources/config/routing/rendezvous.yml"
+    prefix:   /r
+
+veterinaire_homepage:
+    path:     /rr
+    defaults: { _controller: VeterinaireBundle:Default:index }

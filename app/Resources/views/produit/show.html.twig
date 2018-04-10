@@ -1,0 +1,135 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <link href="{{ asset('css/colors/theme-skin-lightgreen.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/style-main.css') }}" rel="stylesheet" type="text/css">
+
+
+
+
+    <div class="main-content">
+        <!-- Section: inner-header -->
+        <section class="inner-header divider parallax layer-overlay overlay-white-8" data-bg-img="http://placehold.it/1920x1280">
+            <div class="container pt-60 pb-60">
+                <!-- Section Content -->
+                <div class="section-content">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h2 class="title">Prouct Details</h2>
+                            <ol class="breadcrumb text-center text-black mt-10">
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Pages</a></li>
+                                <li class="active text-theme-colored">Page Title</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <div class="section-content">
+                    <div class="row">
+                        <div class="product">
+                            <div class="col-md-5">
+                                <div  class="col-lg-6 col-md-6 col-sm-6">
+
+                                    <a href="{{ asset('productImages/')~ produit.imageproduit}}"    >
+                                        <img height="400" width="500"
+                                             alt="img"
+                                             src="{{ asset('productImages/')~ produit.imageproduit}}"
+                                        >
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="product-summary">
+                                    <h2 class="product-title">{{ produit.libelleproduit }}</h2>
+                                    <div class="product_review">
+                                        <ul class="review_text list-inline">
+                                            <li>
+                                                <div title="Rated 4.50 out of 5" class="star-rating"><span style="width: 90%;">4.50</span></div>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                    <div class="price"> <ins><span class="amount">${{ produit.prixproduit }}</span></ins> </div>
+                                    <div class="short-description">
+                                    </div>
+                                    <div class="category"><strong>Category:</strong> <a href="{{ path('produit_bycat',{'categorie': produit.idcategorie }) }}">{{ categorie | title }}</a></div>
+                                    <div class="cart-form-wrapper mt-30">
+                                        <form enctype="multipart/form-data" method="post" class="cart">
+                                            <input type="hidden" value="productID" name="add-to-cart">
+                                            <table class="table variations no-border">
+                                                <tbody>
+
+                                                <tr>
+                                                    <td class="name">Amount</td>
+                                                    <td class="value">
+                                                        <div class="quantity buttons_added">
+                                                            <input type="button" class="minus" value="-">
+                                                            <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" id="quantity" min="1" step="1" onkeyup="checkquantity()">
+                                                            <input type="button" class="plus" value="+">
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <div id="error"></div>
+                                            <button class="single_add_to_cart_button btn btn-default" type="button" {% if app.user == null %} disabled="disabled"  {% else %} {% if(app.user.id == produit.iduser) %} disabled="disabled"  {% endif %} onclick="ajouter()" {% endif %}   >Ajouter au panier{% if app.user == null %} ( SVP SECONNECTER ){% endif %}</button>
+                                            {% if app.user %}
+                                            {% if app.user.id == produit.iduser %}
+                                                <a href="{{ path('produit_edit',{'idproduit': produit.idproduit}) }}"><button class="single_add_to_cart_button btn btn-default" type="button">Modifier / Supprimer</button></a>
+                                            {% endif %}
+                                            {% endif %}
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="horizontal-tab product-tab">
+                                    <ul class="nav nav-tabs" >
+                                        <li class="active"><a href="#tab1" data-toggle="tab" style="height: 30px;">Description</a></li>
+
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in active" id="tab1">
+                                            <h3>Product Description</h3>
+                                            <p>{{ produit.descriptionproduit }}</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        function ajouter() {
+            var loc = "{{ url('panier_index') }}new/{{ produit.idproduit }}/"+document.getElementById('quantity').value
+            window.location.replace(loc);
+        }
+        function checkquantity() {
+            if (document.getElementById('quantity').value > {{ produit.stock }}){
+                document.getElementById('quantity').value = {{ produit.stock }};
+                document.getElementById('error').innerHTML = "<div class='alert alert-warning'> Stock insuffisant</div>";
+            }
+            else {
+                document.getElementById('error').innerHTML ="";
+            }
+        }
+
+    </script>
+    <script src="{{ asset('js/jquery-2.2.4.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <!-- JS | jquery plugin collection for this theme -->
+    <script src="{{ asset('js/jquery-plugin-collection.js') }}"></script>
+{% endblock %}

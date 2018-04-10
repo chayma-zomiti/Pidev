@@ -1,0 +1,39 @@
+produit_index:
+    path:     /
+    defaults: { _controller: "UserBundle:Produit:index" }
+    methods:  GET
+produit_new:
+    path:     /new
+    defaults: { _controller: "UserBundle:Produit:new" }
+    methods:  [GET, POST]
+
+produit_Search:
+    path:     /recherche/{libelle}
+    defaults: { _controller: "UserBundle:Produit:Search" }
+    methods:  GET
+
+produit_bycat:
+    path:     /categorie/{categorie}
+    defaults: { _controller: "UserBundle:Produit:Bycat" }
+    methods:  GET
+
+produit_show:
+    path:     /{idproduit}/show
+    defaults: { _controller: "UserBundle:Produit:show" }
+    methods:  GET
+
+
+produit_edit:
+    path:     /{idproduit}/edit
+    defaults: { _controller: "UserBundle:Produit:edit" }
+    methods:  [GET, POST]
+
+produit_delete:
+    path:     /{idproduit}/delete
+    defaults: { _controller: "UserBundle:Produit:delete" }
+    methods:  DELETE
+
+produit_chart:
+    path:     /chart
+    defaults: { _controller: "UserBundle:Produit:chart" }
+    methods:  GET

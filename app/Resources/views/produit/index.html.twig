@@ -1,0 +1,147 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <link href="{{ asset('css/colors/theme-skin-lightgreen.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/style-main.css') }}" rel="stylesheet" type="text/css">
+
+    <div class="main-content">
+        <!-- Section: inner-header -->
+        <section class="inner-header divider parallax layer-overlay overlay-white-8" data-bg-img="http://placehold.it/1920x1280">
+            <div class=" pt-60 pb-60" style="padding-top: 120px">
+                <!-- Section Content -->
+                <div class="section-content">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h2 class="title">bienvenue sur nos boutiques </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="">
+            <div class="container">
+                <div class="section-content">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="products">
+                                <div class="row multi-row-clearfix" id="produitlist">
+                                    {% for  produit in produits %}
+                                    <div class="col-sm-6 col-md-4 col-lg-4 mb-30">
+                                        <div class="product">
+                                            <span class="tag-sale">Sale!</span>
+                                            <div class="product-thumb">  <a href="{{ path('produit_show', { 'idproduit': produit.idproduit }) }}"    >
+                                                    <img height="200" width="250"
+                                                         alt="img"
+                                                         src="{{ asset('productImages/')~ produit.imageproduit}}"
+                                                    >
+                                                </a>
+
+
+                                                <div class="overlay"></div>
+                                            </div>
+                                            <div class="product-details text-center">
+                                                <a href="{{ path('produit_show', { 'idproduit': produit.idproduit }) }}"><h5 class="product-title">{{ produit.libelleproduit }}</h5></a>
+                                                <div class="star-rating" title="Rated 4.50 out of 5"><span style="width: 90%;">3.50</span></div>
+                                                <div class="price"><del><span class="amount"></span></del><ins><span class="amount">${{ produit.prixproduit }}</span></ins></div>
+                                                <!--<div class="btn-add-to-cart-wrapper">
+                                                    <a class="btn btn-default btn-xs btn-add-to-cart" href="#">Add To Cart</a>
+                                                </div>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="sidebar sidebar-right mt-sm-30">
+                                <div class="widget">
+                                    <h5 class="widget-title line-bottom">Search box</h5>
+                                    <div class="search-form">
+
+                                            <div class="input-group">
+                                                <input type="text" placeholder="Click to Search" class="form-control search-input" id="recherche" onkeyup="loadXMLDoc()">
+                                                <span class="input-group-btn">
+                                                <button onclick="loadXMLDoc()" class="btn search-button"><i class="fa fa-search"></i></button>
+                                                </span>
+                                            </div>
+
+                                    </div>
+                                </div>
+                                {% if app.user %}
+                                    <div class="widget">
+                                        <h5 class="widget-title line-bottom">Tools</h5>
+                                        <div class="search-form">
+                                            <div class="input-group">
+                                                <span class="btn-primary btn">
+                                                <a href="{{ path('produit_new') }}" class="btn ">Ajouter Produit</a>
+                                                </span>
+                                            </div>
+                                        </div><br>
+
+                                        <div class="search-form">
+                                            <div class="input-group">
+                                                <span class="btn-primary btn">
+                                                <a href="{{ path('produit_chart') }}" class="btn ">Mes Produits</a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                <div class="widget">
+                                    <h5 class="widget-title line-bottom">Categories</h5>
+                                    <div class="categories">
+                                        <ul class="list list-border angle-double-right">
+                                            {% for categorie in categories %}
+                                            <li><a href="{{ path('produit_bycat',{ 'categorie': categorie.idcategorie}) }}">{{ categorie.nomcategorie | title }}</a></li>
+                                            {% endfor %}
+
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script>
+        function loadXMLDoc() {
+            var xmlhttp;
+            if (window.XMLHttpRequest) {
+                xmlhttp = new XMLHttpRequest();
+            } else {
+                // code for older browsers
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("produitlist").innerHTML =
+                        this.responseText;
+                }
+            };
+            var r = "all";
+            if(document.getElementById("recherche").value !==""){
+                r = document.getElementById("recherche").value;
+            }
+            else {
+                r = "all";
+            }
+            xmlhttp.open("GET", "{{ url('produit_index') }}recherche/"+r, true);
+            xmlhttp.send();
+        }
+    </script>
+
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('js/jquery-2.2.4.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <!-- JS | jquery plugin collection for this theme -->
+    <script src="{{ asset('js/jquery-plugin-collection.js') }}"></script>
+{% endblock %}

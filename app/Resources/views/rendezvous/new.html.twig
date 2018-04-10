@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <br>
+    <br>
+    <br>
+    <br>
+<style>
+    body {
+        background-image: url({{ asset('images/v1.jpg') }}) ;
+
+        background-attachment:
+                inherit;}
+</style>
+
+<br>
+<br>
+<br>
+    <div class="col-md-12" id="contact_form" align="left">
+        <h1 style="margin-left: 100px; color: black"><strong>Prenez un rendez-vous</strong></h1>
+        <div role="form" class="wpcf7" id="wpcf7-f370-p63-o1" lang="en-US" dir="ltr">
+            <div class="screen-reader-response"></div>
+            {{ form_start(form) }}
+            <div style="display: none;">
+                    <input type="hidden" name="_wpcf7" value="370">
+                    <input type="hidden" name="_wpcf7_version" value="4.9.2">
+                    <input type="hidden" name="_wpcf7_locale" value="en_US">
+                    <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f370-p63-o1">
+                    <input type="hidden" name="_wpcf7_container_post" value="63">
+                </div>
+
+            <div class="col-md-4">
+            <div class="full-width">
+                {{ form_widget(form.num, { 'attr': {'class': 'wpcf7-form-control wpcf7-text wpcf7-validates-as-required','name':'your-name','placeholder':'Numero de telephone','size':60} }) }}
+                {{form_errors(form.num)}}
+            </div><br>
+
+            <div class="full-width">
+                {{ form_widget(form.date, { 'attr': {'class': 'form-control ','name':'your-name','placeholder':'date','size':60} }) }}
+                {{form_errors(form.date)}}
+            </div><br>
+            <div class="full-width">
+                {{ form_widget(form.heure, { 'attr': {'class': 'form-control ','name':'your-name','placeholder':'heure','size':60} }) }}
+                {{form_errors(form.heure)}}
+            </div><br>
+            <div class="full-width">
+                {{ form_widget(form.typea, { 'attr': {'class': 'wpcf7-form-control wpcf7-text wpcf7-validates-as-required','name':'your-name','placeholder':'Votre animal','size':60} }) }}
+                {{form_errors(form.typea)}}
+            </div><br>
+            <div class="full-width">
+                {{ form_widget(form.photoa, { 'attr': {'class': 'wpcf7-form-control wpcf7-text wpcf7-validates-as-required','name':'your-name','placeholder':"Photo de l'animal",'size':60} }) }}
+                {{form_errors(form.photoa)}}
+            </div><br>
+            {{ form_widget(form) }}
+            <input class=" btn-success" type="submit" value="Prenez un rendez-vous" />
+            {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

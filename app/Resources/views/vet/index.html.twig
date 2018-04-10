@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <br>
+    <br>
+    <br>
+    <br><br>
+
+    <br>
+    <br>
+
+    <br>
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+
+<form action="{{ path('rech_vet') }}">
+ <input type="text" name="search" placeholder="Recherche veterinaire??" class="form-control">
+</form>
+
+        <hr>
+    </div>
+<div class="col-md-3">
+    <h5>Nombre de veterinaire trouvé: {{ vet|length }}</h5>
+</div>
+    <div align="left" class="container blog-holder">
+    <div class="row">
+        <table class="table table-fixed table-striped"  >
+            <thead>
+            <tr>
+                <th>Nom et Pernom</th>
+                <th>Email</th>
+                <th>Sexe</th>
+                <th>Age</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+    {% for v in vet %}
+    <tr>
+        <td> {{ v.fullname }}</td>
+        <td> {{ v.email }}</td>
+        <td> {{ v.sexe }}</td>
+        <td> {{ date('now').diff((v.dnaiss('Y'))).format('%y ans') }}</td>
+        <td width="10%"> <a class="btn btn-default btn-green" href="{{ path('r_new') }}">Prenez un render-vous</a> </td>
+
+    </tr>
+
+
+        {% endfor %}
+            </tbody></table>
+    </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,13 @@
+user_servicelist:
+    resource: "@UserBundle/Resources/config/routing/servicelist.yml"
+    prefix:   /servicelist
+user_panier:
+    resource: "@UserBundle/Resources/config/routing/panier.yml"
+    prefix:   /panier
+user_produit:
+    resource: "@UserBundle/Resources/config/routing/produit.yml"
+    prefix:   /produit
+
+user_homepage:
+    path:     /
+    defaults: { _controller: UserBundle:Default:index }

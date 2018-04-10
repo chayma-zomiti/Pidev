@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <link href="{{ asset('css/colors/theme-skin-lightgreen.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/style-main.css') }}" rel="stylesheet" type="text/css">
+    <!-- Start main-content -->
+    <div class="main-content">
+        <!-- Section: inner-header -->
+        <section class="inner-header divider parallax layer-overlay overlay-white-8" data-bg-img="http://placehold.it/1920x1280">
+            <div class="container pt-60 pb-60">
+                <!-- Section Content -->
+                <div class="section-content">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h2 class="font-28">Liste des Services</h2>
+                                <ol class="breadcrumb text-center text-black mt-10">
+                                    <li><a href="/">Acceuil</a></li>
+                                    <li class="active text-theme-colored">Liste des Services</li>
+                                    {% if app.user %}
+                                        <li><a href="{{ path('servicelist_new') }}">(Ajouter un service)</a></li>
+                                    {% endif %}
+                                </ol>
+                            <br>
+                            <div class="widget">
+                                <h5 class="widget-title ">Search box</h5>
+                                <div class="search-form">
+
+                                    <div class="input-group">
+                                        <input type="text" placeholder="Click to Search" class="form-control search-input" id="recherche" onkeyup="loadXMLDoc()">
+                                        <span class="input-group-btn">
+                                                <button onclick="loadXMLDoc()" class="btn search-button"><i class="fa fa-search"></i></button>
+                                                </span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container pb-0">
+                <div class="row text-center" id="slist">
+                    {% for servicelist in servicelists %}
+                    <div class="col-sm-4" >
+                        <div class="icon-box iconbox-border iconbox-theme-colored p-40" >
+                            <a style="margin-top: 10px" href="{{ path('servicelist_show', { 'id': servicelist.id }) }}" class="icon icon-gray icon-bordered icon-border-effect effect-flat">
+                                <i class="pe-7s-clock"></i>
+                            </a>
+                            <h5 class="icon-box-title">{{ servicelist.servicetype }}</h5>
+                            <p class="text-gray">{{ servicelist.description }}</p>
+                            <a class="btn btn-dark btn-sm mt-15" href="{{ path('servicelist_show', { 'id': servicelist.id }) }}" style="margin-bottom: 10px">Apply Now</a>
+                            {% if app.user %}
+                            {% if app.user.id == servicelist.creator %}
+                            <a class="btn btn-dark btn-sm mt-15" href="{{ path('servicelist_edit', { 'id': servicelist.id }) }}" style="margin-bottom: 10px">Edit / Delete</a>
+                            {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+
+    </div>
+    <!-- end main-content -->
+    <script>
+        function loadXMLDoc() {
+            var xmlhttp;
+            if (window.XMLHttpRequest) {
+                xmlhttp = new XMLHttpRequest();
+            } else {
+                // code for older browsers
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("slist").innerHTML =
+                        this.responseText;
+                }
+            };
+            var r = "all";
+            if(document.getElementById("recherche").value !==""){
+                r = document.getElementById("recherche").value
+            }
+            else {
+                r = "all";
+            }
+            xmlhttp.open("GET", "{{ url('servicelist_index') }}recherche/"+r, true);
+            xmlhttp.send();
+        }
+    </script>
+
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('js/jquery-2.2.4.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <!-- JS | jquery plugin collection for this theme -->
+    <script src="{{ asset('js/jquery-plugin-collection.js') }}"></script>
+{% endblock %}
