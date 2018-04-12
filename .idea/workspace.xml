@@ -1,41 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="814417c5-5e17-4464-9f06-64a6ce98cdf4" name="Default" comment="saif">
-      <change beforePath="$PROJECT_DIR$/.idea/Pidev.iml" afterPath="$PROJECT_DIR$/.idea/Pidev.iml" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" afterPath="$PROJECT_DIR$/.idea/php.xml" />
+    <list default="true" id="814417c5-5e17-4464-9f06-64a6ce98cdf4" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/AppKernel.php" afterPath="$PROJECT_DIR$/app/AppKernel.php" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/rendezvous/edit.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/rendezvous/edit.html.twig" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/rendezvous/index.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/rendezvous/index.html.twig" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/rendezvous/new.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/rendezvous/new.html.twig" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/rendezvous/show.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/rendezvous/show.html.twig" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/vet/index.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/vet/index.html.twig" />
-      <change beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
-      <change beforePath="$PROJECT_DIR$/app/config/config_dev.yml" afterPath="$PROJECT_DIR$/app/config/config_dev.yml" />
-      <change beforePath="$PROJECT_DIR$/app/config/routing.yml" afterPath="$PROJECT_DIR$/app/config/routing.yml" />
-      <change beforePath="$PROJECT_DIR$/app/config/services.yml" afterPath="$PROJECT_DIR$/app/config/services.yml" />
-      <change beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/UserBundle/Controller/DefaultController.php" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Entity/Annonce.php" afterPath="$PROJECT_DIR$/src/UserBundle/Entity/Annonce.php" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Entity/Commentaire.php" afterPath="$PROJECT_DIR$/src/UserBundle/Entity/Commentaire.php" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Entity/Reponse.php" afterPath="$PROJECT_DIR$/src/UserBundle/Entity/Reponse.php" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Repository/UserRepository.php" afterPath="$PROJECT_DIR$/src/UserBundle/Repository/UserRepository.php" />
-      <change beforePath="$PROJECT_DIR$/src/VeterinaireBundle/Controller/DefaultController.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/VeterinaireBundle/Controller/ListveterinaireController.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/VeterinaireBundle/Controller/RendezVousController.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/VeterinaireBundle/Entity/RendezVous.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/VeterinaireBundle/Form/RendezVousType.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/VeterinaireBundle/Repository/RdvRepository.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/VeterinaireBundle/Resources/config/routing.yml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/VeterinaireBundle/Resources/config/routing/rendezvous.yml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/VeterinaireBundle/Resources/config/services.yml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/VeterinaireBundle/Resources/views/Default/index.html.twig" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/VeterinaireBundle/Tests/Controller/ListveterinaireControllerTest.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/VeterinaireBundle/Tests/Controller/RendezVousControllerTest.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/VeterinaireBundle/VeterinaireBundle.php" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -637,7 +604,7 @@
       <workItem from="1523369494427" duration="1638000" />
       <workItem from="1523374881886" duration="5360000" />
       <workItem from="1523474771786" duration="1800000" />
-      <workItem from="1523504601652" duration="5219000" />
+      <workItem from="1523504601652" duration="5328000" />
     </task>
     <task id="LOCAL-00001" summary="saif">
       <created>1521458761308</created>
@@ -660,11 +627,18 @@
       <option name="project" value="LOCAL" />
       <updated>1521461022400</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="saif">
+      <created>1523511799426</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1523511799426</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="131070000" />
+    <option name="totallyTimeSpent" value="131179000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">

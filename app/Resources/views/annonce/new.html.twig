@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block title %}ajouter une annonce{% endblock %}
+{% block annoncestylsheets %}
+    <style>
+        .cont{
+            width: 500px;
+        }
+        .h1{
+            color: #4FDA8C;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    {% form_theme form ':annonce:bootstrap_3_layout.html.twig' %}
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1 class="h1">Annonce creation</h1>
+    <div class="cont" >
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-primary">
+            <a>
+            Create
+            </a>
+        </button>
+    {{ form_end(form) }}
+        <br>
+
+            <button type="submit" class="btn btn-primary">
+            <a href="{{ path('annonce_index') }}">Back to the list</a>
+            </button>
+
+</div>
+{% endblock %}

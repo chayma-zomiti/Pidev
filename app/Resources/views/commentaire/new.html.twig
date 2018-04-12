@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block annoncestylsheets %}
+    <style>
+        .cont{
+            width: 500px;
+        }
+        .div{
+            width: 150px;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1>Ajouter un commentaire</h1>
+    <div class="cont">
+    {{ form_start(form) }}
+    {{ form_widget(form.commentaire, {'id':'commentaire','attr': {'class': 'form-control','placeholder':'Votre commentaire' }}) }}
+    <br>
+    <button type="submit" class="btn btn-block btn-success btn-flat">
+
+           <a>Commenter </a>
+
+    </button>
+
+    {{ form_end(form) }}
+    </div>
+    <br>
+    <div class="div">
+            <button  class="btn btn-block btn-success btn-flat">
+
+            <a href="{{ path('annonce_index') }}">Liste des annonce</a>
+            </button>
+    </div>
+ {% endblock %}

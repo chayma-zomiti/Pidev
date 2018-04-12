@@ -1,0 +1,230 @@
+{% extends 'base.html.twig' %}
+{% block title  %} {{ annonce.name }}{% endblock %}
+{% block annoncestylsheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+
+        .trouver{
+            color: #4ec67f;
+            border: 1px
+        }
+        .perdu{
+            color: #f9243f;
+            border: 1px
+        }
+
+        @media (min-width: 1200px) {
+            .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9 {
+                float: left
+            }
+        }
+        .col-md-6 {
+            width: 50%
+        }
+        .col-sm-6 {
+            width: 50%;
+        }
+        .color{
+            color: #4FDA8C;
+        }
+        .annonce-title {
+            font-size: 30px;
+            font-weight: 600;
+            letter-spacing: 0.25px;
+            line-height: 1;
+            margin-bottom: 0;
+            text-transform: uppercase;
+        }
+        .likebutton{
+            color: #0000F0;
+        }
+        .dislikebutton{
+            color: #f9243f;
+        }
+        .col-sm-5 {
+            width: 41.66666667%
+        }
+        .annoncecode {
+            font-family: oswald, Helvetica Neue, Arial, sans-serif;
+            font-size: 14px;
+            font-weight: lighter;
+            letter-spacing: 1px;
+            margin: 0 0 5px;
+            padding: 0;
+            text-transform: uppercase;
+        }
+        .commentdiv{
+            width: 900px;
+            border: 2px solid #4ec67f;
+        }
+
+    </style>
+{% endblock %}
+{% block body %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1>Annonce : {{ annonce.name }}</h1>
+
+    <div class="container">
+        <div  class="col-lg-6 col-md-6 col-sm-6">
+
+            <a href="{{ asset('productImages/')~ annonce.nomImage}}"    >
+                <img height="400" width="500"
+                     alt="img"
+                     src="{{ asset('productImages/')~ annonce.nomImage}}"
+                >
+            </a>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-5">
+
+            <h3 class="annonce-title color" >{{ annonce.name }} </h3>
+            <br>
+            <h2 class="annoncecode color">annonce id :{{ annonce.id }} </h2>
+
+            <br>
+            {% if annonce.type=="trouver"  %}
+
+                <div class="trouver">trouver</div>
+
+            {% else %}
+                <div class="perdu">perdu</div>
+
+            {% endif %}
+
+
+            <br>
+            <h1>{{ annonce.annoncetext }}</h1>
+            <div>
+
+
+
+                <button class="fa fa-thumbs-up likebutton">  <a href="{{ path('annonce_like', { 'id': annonce.id }) }}"> {{ annonce.likecount }}</a> </button>
+                <button class="fa fa-thumbs-down dislikebutton">  <a href="{{ path('annonce_dislike', { 'id': annonce.id }) }}"> {{ annonce.dislikecount }}</a></button>
+                <button class="fa fa-exclamation ">  <a href="{{ path('annonce_signaler', { 'id': annonce.id }) }}"> {{ annonce.signalercount }}</a></button>
+
+            </div>
+            <br>
+
+
+
+
+
+
+
+            <button type="submit" class="btn btn-primary">
+                <a href="{{ path('annonce_index') }}">Back to the list</a>
+
+            </button>
+            <br>
+            <br>
+            {% if app.user.id == annonce.iduser %}
+                <table>
+                    <td>
+
+                        <button class="btn btn-primary">
+                            <a href="{{ path('annonce_edit', { 'id': annonce.id }) }}">Edit</a>
+                        </button>
+                    </td>
+
+                    <td>
+                        {{ form_start(delete_form) }}
+                        <button type="submit" class="btn btn-primary">
+                            <a>                        Delete
+                            </a>
+                        </button>
+                        {{ form_end(delete_form) }}
+                    </td>
+
+                </table>
+
+            {% endif %}
+            {#{{ socialButtons() }}#}
+
+        </div>
+    </div>
+    <div class="commentdiv">
+        <br>
+        {% for commentaire in commentaires %}
+
+
+            <div class="container">
+                <div class="row">
+
+                </div><!-- /row -->
+                <div class="row">
+                    <div class="col-sm-1">
+                        <div class="thumbnail">
+                            <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                        </div><!-- /thumbnail -->
+                    </div><!-- /col-sm-1 -->
+
+                    <div class="col-sm-5">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <strong>{{ app.user.fullname }}</strong> <span class="text-muted"> commentée le
+                                    {{ commentaire.datecommentaire|date("d/m/Y") }}</span>
+                            </div>
+                            <div class="panel-body">
+                                {{ commentaire.commentaire }}
+
+                                <div class="panel-body">
+
+                                    {% if app.user.id == commentaire.idusercommentaire  %}
+                                        <button class="btn btn-block btn-warning btn-flat" >
+                                        <a  href="{{ path('commentaire_edit', {'id': commentaire.id}) }}">
+                                            edit
+                                        </a></button>
+                                    <button class="btn btn-block btn-danger btn-flat" >
+
+                                    <a href="{{ path('commentaire_edit', {'id': commentaire.id}) }}">
+                                           delete
+                                        </a>
+                                    </button>
+                                        <br>
+                                        <br>
+                                        {% endif %}
+
+                                </div>
+                            </div>
+
+                           {#{% for reponse in reponses %}#}
+                               {# {% if reponse.idcommentaire == commentaire %}
+
+                            <div class="panel-heading">
+                                {{ reponse.textreponse }}                            </div>
+                            {% endif %}#}
+                            {#{% endfor %}#}
+
+
+
+                            <!-- /panel-body -->
+                        </div><!-- /panel panel-default -->
+                    </div><!-- /col-sm-5 -->
+
+
+
+
+                </div><!-- /row -->
+
+            </div><!-- /container -->
+        {% endfor %}
+        <button class="btn btn-primary">
+            <a id="commenttext" href="{{ path('commentaire_new', {'id': annonce.id}) }}">Commenter</a>
+        </button>
+
+
+    </div>
+
+{% endblock %}
+{% block annoncejavascripts %}
+    <script>
+
+        function myFunction() {
+            document.getElementById("like").style.color = "blue";
+
+        }
+    </script>
+{% endblock %}

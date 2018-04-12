@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <style>
+        body {
+            background-image: url({{ asset('images/v1.jpg') }}) ;
+
+            background-attachment:
+                    inherit;}
+    </style>
+
+    <br>
+    <br>
+    <br>
+    <div class="col-md-12" id="contact_form" align="left">
+        <div role="form" class="wpcf7" id="wpcf7-f370-p63-o1" lang="en-US" dir="ltr">
+            <div class="screen-reader-response"></div>
+
+
+            <div class="col-md-4">
+                <div class="full-width">
+                    <h2 style="color: black;">Confirmer Le RendezVous
+                    </h2>
+                    {{ form_start(form) }}
+
+                    <div class="full-width">
+                    {{ form_widget(form.maladie, { 'attr': {'class': 'form-control ','name':'your-name','placeholder':'Description de la Maladie','size':60} }) }}
+                    {{form_errors(form.maladie)}}
+                </div><br>
+
+                {{ form_widget(form) }}
+                    {% if rendezVous.maladie=="" %}
+                    <input class=" btn-success"  style="background-color: green; border-color: green" type="submit" value="Confirmez le rendez-vous" />
+{% else %}
+    <input class="btn btn-default btn-block btn-success" style="background-color: green; border-color: green" type="submit" value="Modifier la Maladie" />
+
+                    {% endif %}
+
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                    {% if rendezVous.maladie!="" %}
+
+                        <a class="btn btn-default btn-block btn-success" style="background-color: darkred; border-color: darkred" href="{{ path('pdf',{'id':rendezVous.id}) }}" >Imperimer Fiche maladie(PDF)</a>
+
+                    {% endif %}
+                    {{ form_end(form) }}
+                </div>
+        </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-6">
+
+            </div>
+    </div>
+
+    </div>
+{% endblock %}

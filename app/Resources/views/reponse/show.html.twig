@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Reponse</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ reponse.id }}</td>
+            </tr>
+            <tr>
+                <th>Textreponse</th>
+                <td>{{ reponse.textreponse }}</td>
+            </tr>
+            <tr>
+                <th>Datereponse</th>
+                <td>{% if reponse.datereponse %}{{ reponse.datereponse|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Likecount</th>
+                <td>{{ reponse.likecount }}</td>
+            </tr>
+            <tr>
+                <th>Dislikecount</th>
+                <td>{{ reponse.dislikecount }}</td>
+            </tr>
+            <tr>
+                <th>Signaler</th>
+                <td>{{ reponse.signaler }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('reponse_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('reponse_edit', { 'id': reponse.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

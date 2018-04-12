@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <br>
+    <br>
+    <br>
+    <br><br>
+
+    <br>
+    <br>
+
+    <br>
+    <div class="container">    <div class="row">
+
+            <div class="col-md-12"></div>
+            <div class="col-md-12">
+
+                <form action="{{ path('rech_vet') }}">
+                    <input type="text" name="search" placeholder="Recherche veterinaire??" class="form-control">
+                </form>
+
+                <hr>
+            </div>
+
+            <div class="col-md-12">
+                <h5>Liste des Veterinaires trouvé: {{ vet|length }}</h5>
+            </div>
+
+<div class="col-md-12">
+
+<div class="col-md-12"></div>
+
+
+        <table class="table table-fixed table-striped"  >
+            <thead>
+            <tr>
+                <th>Nom et Pernom</th>
+                <th>Email</th>
+                <th>Sexe</th>
+                <th>Age</th>
+            </tr>
+            </thead>
+            <tbody>
+    {% for v in vet %}
+    <tr>
+
+        <td> {{ v.fullname }}</td>
+        <td> {{ v.email }}</td>
+        <td> {{ v.sexe }}</td>
+        <td> {{ date('now').diff((v.dnaiss('Y'))).format('%y ans') }}</td>
+
+    </tr>
+
+
+        {% endfor %}
+            </tbody></table>
+
+</div>
+
+        </div>
+    </div>
+{% endblock %}

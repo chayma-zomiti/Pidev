@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <br>
+    <br>
+    <br>
+    <br><br>
+
+    <br>
+    <br>
+
+    <br>
+
+    <form action="{{ path('rech_rdv') }}">
+        <input type="text" name="search" placeholder="Recherche rendez vous??" class="form-control">
+    </form>
+
+    <hr>
+    </div>
+
+    <h1>Vous avez {{ rendezVouses |length }} Rendez-vous</h1>
+    <div align="left" class="container blog-holder">
+    <div class="row">
+
+    {% for rendezVous in rendezVouses  if rendezVous.idVet==app.user.id %}
+
+                    <div class="col-md-4" style="height: 550px">
+
+                                <a href="{{ path('r_show',{'id':rendezVous.id}) }}"
+                                <div  class="post-315 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized tag-overnight tag-prices">
+                                    <img src="{{ asset('rdvupload/'~rendezVous.photoa) }}" height="200px">
+                                    <h2><span>{{ rendezVous.date|date('Y-m-d') }}</span></h2>
+                                    <p class="post-info">
+                                        {{ rendezVous.heure|date('H:i') }} <span>|</span>
+                                        Par <strong>{{ rendezVous.nom }}</strong> <span>|</span>
+                                        {{ rendezVous.email }}
+                                    </p>
+                                    <p class="post-img-wrap">
+
+                                    <div class="col-md-6" style="font-size: xx-large"> <center><a  href="tel:{{ rendezVous.num }}"  align="left"><i class="fa fa-phone"></i>      &emsp;&emsp;&emsp;{{ rendezVous.num }}</a></center></div>
+                                    <div class="col-md-6" style="font-size: xx-large"><p align="left"><i class="fa fa-paw"></i>      &emsp;&emsp;&emsp;{{ rendezVous.typea }}</p></div>
+
+                            </div>
+
+
+        {% endfor %}
+
+    </div>
+    </div>
+
+    </div>
+{% endblock %}
