@@ -21,6 +21,8 @@ class AppKernel extends Kernel
             new VeterinaireBundle\VeterinaireBundle(),
             new Vresh\TwilioBundle\VreshTwilioBundle(),
             new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+           // new Nomaya\SocialBundle\NomayaSocialBundle(),
 
         ];
 

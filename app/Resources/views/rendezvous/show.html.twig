@@ -6,21 +6,15 @@
 <br>
 <br>
 <br>
-<style>
-    body {
-        background-image: url({{asset('images/v4.jpg') }}) ;
-        background-image: no-repeat;
-        background-attachment:
-                inherit;}
-</style>
 <br>
+
 <br>
 <br>
 <br>
     <div align="left" class="container blog-holder">
         <div class="row">
-            <h1>Votre dernier Rendez-Vous:{{ rendezVous.id }}</h1>
-                <div class="col-md-9 posts">
+            <h1></h1>
+                <div class="col-md-12 posts">
                 <div class="row">
 
                     <div class="col-md-12">
@@ -31,13 +25,50 @@
                                 Par <strong>{{ rendezVous.nom }}</strong> <span>|</span>
                                 {{ rendezVous.email }}
                                   </p>
-                            <p class="post-img-wrap">
-                                <img width="848" height="278" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" src="../../wp-content/uploads/2014/06/blog-1.png" srcset="http://petcare.klevermedia.co.uk/wp-content/uploads/2014/06/blog-1.png 848w, http://petcare.klevermedia.co.uk/wp-content/uploads/2014/06/blog-1-300x98.png 300w, http://petcare.klevermedia.co.uk/wp-content/uploads/2014/06/blog-1-768x252.png 768w, http://petcare.klevermedia.co.uk/wp-content/uploads/2014/06/blog-1-374x123.png 374w, http://petcare.klevermedia.co.uk/wp-content/uploads/2014/06/blog-1-360x118.png 360w" sizes="(max-width: 848px) 100vw, 848px"> </p>
 
-                            <div class="col-md-6" style="font-size: xx-large"> <center><a  href="tel:{{ rendezVous.num }}"  align="left"><i class="fa fa-phone"></i>      &emsp;&emsp;&emsp;{{ rendezVous.num }}</a></center></div>
-                            <div class="col-md-6" style="font-size: xx-large"><p align="left"><i class="fa fa-paw"></i>      &emsp;&emsp;&emsp;{{ rendezVous.typea }}</p></div>
-                             </div>
-                    </div>
+                            <p class="post-img-wrap">
+                                <img width="500" height="278" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" src="{{ asset('rdvupload/'~rendezVous.photoa) }}" srcset="{{ asset('rdvupload/'~rendezVous.photoa) }} 848w, {{ asset('rdvupload/'~rendezVous.photoa) }} 300w, {{ asset('rdvupload/'~rendezVous.photoa) }} 768w, {{ asset('rdvupload/'~rendezVous.photoa) }} 374w, {{ asset('rdvupload/'~rendezVous.photoa) }} 360w" sizes="(max-width: 848px) 100vw, 848px"> </p>
+
+
+                            <div class="horizontal-tab product-tab">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#tab1" data-toggle="tab" style="height: 30px;">Numero de patient</a></li>
+                                    <li><a href="#tab2" data-toggle="tab" style="height: 30px;">Animal</a></li>
+                                {% if rendezVous.maladie!="" %}
+                                    <li><a href="#tab3" data-toggle="tab" style="height: 30px;">Maladie</a></li>
+
+                                {% endif %}
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade in active" id="tab1">
+                                        <h3><a  href="tel:{{ rendezVous.num }}"  align="left"><i class="fa fa-phone"></i>      &emsp;&emsp;&emsp;{{ rendezVous.num }}</a></h3>
+                                    </div>
+                                    <div class="tab-pane fade in" id="tab2">
+                                        <h3><i class="fa fa-paw"></i>      &emsp;&emsp;&emsp;{{ rendezVous.typea }}</h3>
+
+                                    </div>
+                                    {% if rendezVous.maladie!="" %}
+                                        <div class="tab-pane fade in" id="tab3">
+                                            <h3><i class="fa fa-user-md"></i> Maladie: </h3>
+                                            <p style="word-break:break-all" >{{ rendezVous.maladie }}</p>
+
+                                        </div>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+                        {% if app.user.Fonctionuser==2 %}
+                            <a class="btn btn-default btn-green btn-lg btn-block" href="{{ path('r_edit2',{'id':rendezVous.id}) }}">Confirmer le rendez-vous</a>
+                            {% if rendezVous.verif ==0%}
+                                <form action="{{ path('r_delete', { 'id':rendezVous.id }) }}" method="post">
+                                    {{ form_widget(delete_form) }}
+                                    <button class="btn btn-default  btn-red btn-lg btn-block" style="border-color: #e52424;color: #e52424"  type="submit">Annuler le rendez-vous</button>
+
+                                </form>
+
+                            {% endif %}
+                        {% endif %}                    </div>
 
                 </div>
             </div>

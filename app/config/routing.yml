@@ -1,3 +1,13 @@
+
+
+user_commentaire:
+    resource: "@UserBundle/Controller/CommentaireController.php"
+    type:     annotation
+
+user_annonce:
+    resource: "@UserBundle/Controller/AnnonceController.php"
+    type:     annotation
+
 veterinaire:
     resource: "@VeterinaireBundle/Resources/config/routing.yml"
     prefix:   /

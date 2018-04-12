@@ -10,23 +10,72 @@
     <br>
 
     <br>
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
+    <div class="container">    <div class="row">
 
-<form action="{{ path('rech_vet') }}">
- <input type="text" name="search" placeholder="Recherche veterinaire??" class="form-control">
-</form>
+            <div class="col-md-12"></div>
+            <div class="col-md-12">
 
-        <hr>
-    </div>
-<div class="col-md-3">
-    <h5>Nombre de veterinaire trouvé: {{ vet|length }}</h5>
+                <form action="{{ path('rech_vet') }}">
+                    <input type="text" name="search" placeholder="Recherche veterinaire??" class="form-control">
+                </form>
+
+                <hr>
+            </div>
+
+            <div class="col-md-12">
+                <h5>Liste des Veterinaires trouvé: {{ vet|length }}</h5>
+            </div>
+
+            <div class="col-md-5">
+
+
+
+    <table class="table table-fixed table-striped"  >
+        <thead>
+        <tr>
+            <th>Photo animal</th>
+            <th>Date</th>
+            <th>Heure</th>
+            <th>RendezVous</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for RendezVous in RendezVouss %}
+            <tr>
+                <td>                                    <img src="{{ asset('rdvupload/'~RendezVous.photoa) }}" height="20px">
+                </td>
+                <td> {{ RendezVous.date|date('Y-m-d') }}</td>
+                <td>{{ RendezVous.heure|date('H:i') }}</td>
+
+                              <td width="10%">
+
+                                  {% if RendezVous.maladie=="" %}
+                                  <a class="btn btn-default btn-green" style="width: 100%" href="{{ path('r_edit',{'id':RendezVous.id}) }}">Modifier votre render-vous</a></td>
+
+                {% else %}
+                    <a class="btn btn-default btn-green" style="width: 100%" href="{{ path('r_show',{'id':RendezVous.id}) }}">Voir votre render-vous</a>
+
+                {% endif %}
+                </td>
+            </tr>
+
+
+        {% endfor %}
+        </tbody></table>
+
 </div>
-    <div align="left" class="container blog-holder">
-    <div class="row">
+
+            <div class="col-md-1"></div>
+
+<div class="col-md-6">
+
+<div class="col-md-12"></div>
+
+
         <table class="table table-fixed table-striped"  >
             <thead>
             <tr>
+                <th></th>
                 <th>Nom et Pernom</th>
                 <th>Email</th>
                 <th>Sexe</th>
@@ -37,17 +86,22 @@
             <tbody>
     {% for v in vet %}
     <tr>
+        <td><img src="{{ asset('rdvupload/'~app.user.imgpath) }}" height="20px">
+
         <td> {{ v.fullname }}</td>
         <td> {{ v.email }}</td>
         <td> {{ v.sexe }}</td>
         <td> {{ date('now').diff((v.dnaiss('Y'))).format('%y ans') }}</td>
-        <td width="10%"> <a class="btn btn-default btn-green" href="{{ path('r_new') }}">Prenez un render-vous</a> </td>
+        <td width="10%"> <a class="btn btn-default btn-green" href="{{ path('r_new',{'id':v.id}) }}">Prenez un render-vous</a> </td>
 
     </tr>
 
 
         {% endfor %}
             </tbody></table>
-    </div>
+
+</div>
+
+        </div>
     </div>
 {% endblock %}

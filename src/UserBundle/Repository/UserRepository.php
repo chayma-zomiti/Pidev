@@ -16,7 +16,7 @@ class UserRepository extends EntityRepository
         return $this->createQueryBuilder('v')
             ->where('v.fullname Like :valeur')
             ->OrWhere('v.email Like :valeur')
-            ->OrWhere('v.fonctionuser = 2')
+            ->andWhere('v.fonctionuser = 2')
             ->setParameter('valeur',"%".$v.'%')
             ->getQuery()
             ->getResult();

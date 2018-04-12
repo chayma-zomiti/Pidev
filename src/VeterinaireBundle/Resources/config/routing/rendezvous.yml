@@ -6,10 +6,10 @@ r_index:
 r_show:
     path:     /{id}/show
     defaults: { _controller: "VeterinaireBundle:RendezVous:show" }
-    methods:  GET
+    methods:  [GET, DELETE]
 
 r_new:
-    path:     /new
+    path:     /{id}/new
     defaults: { _controller: "VeterinaireBundle:RendezVous:new" }
     methods:  [GET, POST]
 
@@ -34,4 +34,16 @@ rech_vet:
 rech_rdv:
     path:     /rechercher
     defaults: { _controller: "VeterinaireBundle:RendezVous:recherche" }
+    methods:  GET
+
+
+r_edit2:
+    path:     /{id}/confirmation
+    defaults: { _controller: "VeterinaireBundle:RendezVous:edit2" }
+    methods:  [GET, POST,DELETE ]
+
+
+pdf:
+    path:     /{id}/pdf
+    defaults: { _controller: "VeterinaireBundle:RendezVous:generatePdf" }
     methods:  GET

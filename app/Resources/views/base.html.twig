@@ -46,8 +46,8 @@
                     <li class="active">
                         <a  href="{{ path('user_homepage') }}"  title="Home"><span data-hover="Acceuil">Acceuil</span></a>
                     </li>
-                    <li>
-                        <a href="#" title="Pets"><span data-hover="Annonces">Annonces</span></a>
+                    <li class="active">
+                        <a href="{{ path('annonce_index') }}" title="Pets"><span data-hover="Annonces">Annonces</span></a>
                     </li>
                     <li>
                         <a href="{{ path('servicelist_index') }}" title="Products"><span data-hover="Services">Services</span></a>
@@ -55,9 +55,25 @@
                     <li>
                         <a href="{{ path('produit_index') }}" title="Leisure"><span data-hover="Shop">Shop</span></a>
                     </li>
-                    <li >
-                        <a  href="{{ path('servicelist_index') }}"  title="Services"><span data-hover="Reservations">Reservations</span></a>
-                    </li>
+                    {% if app.user %}
+                        {% if app.user.fonctionUser==2 %}
+                            <li >
+                                <a  href="{{ path('r_index') }}"  title="Services"><span data-hover="Reservations">Reservations</span></a>
+                            </li>
+                        {% elseif app.user.fonctionUser==1 %}
+                            <li >
+                                <a  href="{{ path('v_index') }}"  title="Services"><span data-hover="Reservations">Reservations</span></a>
+                            </li>
+                        {% elseif app.user.fonctionUser==0 %}
+                            <li >
+                                <a  href="{{ path('v_index') }}"  title="Services"><span data-hover="Reservations">Reservations</span></a>
+                            </li>
+                        {% endif %}
+                    {% else %}
+                        <li>
+                            <a  href="{{ path('v_index') }}"  title="Services"><span data-hover="Reservations">Reservations</span></a>
+                        </li>
+                    {% endif %}
 
                     {% if app.user %}
                     <li>
@@ -116,13 +132,12 @@
 
         {% endblock %}
 
-
-    <div class="footer" style="">
+    <div class="footer" style="position: -ms-device-fixed;margin-top: 50%">
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
                     <h6>A little about us</h6>
-                    <p><strong>Our mission is to save every abondaned-animal and give them the chance to have a home. Paws and Claws gives you the chance to adopt an animal for free and enjoy their company.</strong></p>
+                    <p><strong>Our mission is to save every abondaned-animal and give them the chance to have a home. Zanimaux gives you the chance to adopt an animal for free and enjoy their company.</strong></p>
                     <p>We believe there's a hero in every animals' lover. One click and you'll actually become one !</p>
                 </div>
                 <div class="col-md-3 blog">

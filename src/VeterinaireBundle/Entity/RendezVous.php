@@ -1,6 +1,7 @@
 <?php
 
 namespace VeterinaireBundle\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -72,10 +73,18 @@ class RendezVous
 
     /**
      * @var string
-     *
+     * @Assert\Image()
+     * @Assert\NotBlank(message="Ajouter une image")
      * @ORM\Column(name="photoA", type="string", length=255, nullable=true)
      */
     private $photoa;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_vet", type="integer")
+     */
+    private $idVet;
 
     /**
      * @var string
@@ -100,8 +109,8 @@ class RendezVous
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="maladie", type="string", length=255, nullable=true)
+
+     * @ORM\Column(name="maladie", type="string", length=20000, nullable=true)
      */
     private $maladie;
 
@@ -311,6 +320,23 @@ class RendezVous
     public function setMaladie($maladie)
     {
         $this->maladie = $maladie;
+    }
+
+
+    /**
+     * @return int
+     */
+    public function getIdVet()
+    {
+        return $this->idVet;
+    }
+
+    /**
+     * @param int $idVet
+     */
+    public function setIdVet($idVet)
+    {
+        $this->idVet = $idVet;
     }
 
 

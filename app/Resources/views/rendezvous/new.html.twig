@@ -13,10 +13,21 @@
                 inherit;}
 </style>
 
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+    <script>
+        $(function () {
+
+            $("#veterinairebundle_rendezvous_date").datepicker({
+                minDate:0
+            })
+        });
+
+        alert("jsjk")
+    </script>
 <br>
 <br>
 <br>
-    <div class="col-md-12" id="contact_form" align="left">
+    <div class="col-md-12" id="contact_form" align="left" >
         <h1 style="margin-left: 100px; color: black"><strong>Prenez un rendez-vous</strong></h1>
         <div role="form" class="wpcf7" id="wpcf7-f370-p63-o1" lang="en-US" dir="ltr">
             <div class="screen-reader-response"></div>
@@ -31,24 +42,24 @@
 
             <div class="col-md-4">
             <div class="full-width">
-                {{ form_widget(form.num, { 'attr': {'class': 'wpcf7-form-control wpcf7-text wpcf7-validates-as-required','name':'your-name','placeholder':'Numero de telephone','size':60} }) }}
+                {{ form_widget(form.num, { 'attr': {'class': 'form-control','name':'your-name','placeholder':'Numero de telephone','size':65} }) }}
                 {{form_errors(form.num)}}
             </div><br>
 
             <div class="full-width">
-                {{ form_widget(form.date, { 'attr': {'class': 'form-control ','name':'your-name','placeholder':'date','size':60} }) }}
+                {{ form_widget(form.date, { 'attr': {'class': 'form-control ','name':'your-name','placeholder':'date','size':65} }) }}
                 {{form_errors(form.date)}}
             </div><br>
             <div class="full-width">
-                {{ form_widget(form.heure, { 'attr': {'class': 'form-control ','name':'your-name','placeholder':'heure','size':60} }) }}
+                {{ form_widget(form.heure, { 'attr': {'class': 'form-control ','name':'your-name','placeholder':'heure','size':65} }) }}
                 {{form_errors(form.heure)}}
             </div><br>
             <div class="full-width">
-                {{ form_widget(form.typea, { 'attr': {'class': 'wpcf7-form-control wpcf7-text wpcf7-validates-as-required','name':'your-name','placeholder':'Votre animal','size':60} }) }}
+                {{ form_widget(form.typea, { 'attr': {'class': 'form-control','name':'your-name','placeholder':'Votre animal','size':65} }) }}
                 {{form_errors(form.typea)}}
             </div><br>
             <div class="full-width">
-                {{ form_widget(form.photoa, { 'attr': {'class': 'wpcf7-form-control wpcf7-text wpcf7-validates-as-required','name':'your-name','placeholder':"Photo de l'animal",'size':60} }) }}
+                {{ form_widget(form.photoa, { 'attr': {'class': 'form-control','name':'your-name','placeholder':"Photo de l'animal",'size':65} }) }}
                 {{form_errors(form.photoa)}}
             </div><br>
             {{ form_widget(form) }}

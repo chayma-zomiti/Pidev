@@ -4,6 +4,7 @@ namespace VeterinaireBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -23,14 +24,20 @@ class RendezVousType extends AbstractType
             ->add('num',NumberType::class)
             ->add('date',DateType::class,array(
                 'widget'=>'single_text',
-
-                ))
+                'attr' => array(
+                    'min' => date('Y-m-d')
+                )
+            ))
             ->add('heure',TimeType::class,array(
                 'widget'=>'single_text'
             ))
             ->add('typea',TextType::class)
 
-            ->add('photoa',TextType::class)
+            ->add('photoa',FileType::class , array(
+                'required' => false,
+                'data_class'=>null,
+
+            ))
 ;
 
     }/**

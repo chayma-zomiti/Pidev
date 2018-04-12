@@ -61,10 +61,122 @@ class Reponse
      *
      * @ORM\ManyToOne(targetEntity="Commentaire")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idCommentaire", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="idCommentaire", referencedColumnName="id",onDelete="CASCADE")
      * })
      */
     private $idcommentaire;
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTextreponse()
+    {
+        return $this->textreponse;
+    }
+
+    /**
+     * @param string $textreponse
+     */
+    public function setTextreponse($textreponse)
+    {
+        $this->textreponse = $textreponse;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDatereponse()
+    {
+        return $this->datereponse;
+    }
+
+    /**
+     * @param \DateTime $datereponse
+     */
+    public function setDatereponse($datereponse)
+    {
+        $this->datereponse = $datereponse;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLikecount()
+    {
+        return $this->likecount;
+    }
+
+    /**
+     * @param int $likecount
+     */
+    public function setLikecount($likecount)
+    {
+        $this->likecount = $likecount;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDislikecount()
+    {
+        return $this->dislikecount;
+    }
+
+    /**
+     * @param int $dislikecount
+     */
+    public function setDislikecount($dislikecount)
+    {
+        $this->dislikecount = $dislikecount;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSignaler()
+    {
+        return $this->signaler;
+    }
+
+    /**
+     * @param int $signaler
+     */
+    public function setSignaler($signaler)
+    {
+        $this->signaler = $signaler;
+    }
+
+    /**
+     * @return \Commentaire
+     */
+    public function getIdcommentaire()
+    {
+        return $this->idcommentaire;
+    }
+
+    /**
+     * @param \Commentaire $idcommentaire
+     */
+    public function setIdcommentaire($idcommentaire)
+    {
+        $this->idcommentaire = $idcommentaire;
+    }
 
 
 }

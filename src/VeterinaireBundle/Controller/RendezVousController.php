@@ -2,7 +2,9 @@
 
 namespace VeterinaireBundle\Controller;
 
+use Spipu\Html2Pdf\Html2Pdf;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use VeterinaireBundle\Entity\RendezVous;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +19,7 @@ class RendezVousController extends Controller
      * Lists all rendezVous entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         global $kernel;
         $user = $kernel->getContainer()->get('security.token_storage')->getToken()->getUser();
@@ -26,10 +28,17 @@ class RendezVousController extends Controller
         if ($user!=='anon.' && $user->getFonctionuser()==2){
         $em = $this->getDoctrine()->getManager();
 
-        $rendezVouses = $em->getRepository('VeterinaireBundle:RendezVous')->findAll();
+        $rendezVouses = $em->getRepository('VeterinaireBundle:RendezVous')->findBy(array('idVet'=>$user->getId()));
+            $paginator  = $this->get('knp_paginator');
+            $pagination = $paginator->paginate(
+                $rendezVouses, /* query NOT result */
+                $request->query->getInt('page', 1)/*page number*/,
+                6/*limit per page*/
+            );
 
         return $this->render('rendezvous/index.html.twig', array(
-            'rendezVouses' => $rendezVouses,
+            'pagination' => $pagination,
+            'rdv'=>$rendezVouses
         ));
         }else{
             return $this->redirectToRoute('user_homepage');
@@ -41,7 +50,7 @@ class RendezVousController extends Controller
      * Creates a new rendezVous entity.
      *
      */
-    public function newAction(Request $request)
+    public function newAction($id,Request $request)
     {
 
         global $kernel;
@@ -57,6 +66,16 @@ class RendezVousController extends Controller
             $rendezVous->setDateRdv(new \DateTime());
             $rendezVous->setEmail($user->getEmail());
             if ($form->isSubmitted() && $form->isValid()) {
+                /**
+                 * @var UploadedFile $file
+                 */
+                $file = $rendezVous->getPhotoa();
+                $file->move(
+                    $this->getParameter('rdv_upload'), $file->getClientOriginalName());
+                $rendezVous->setPhotoa($file->getClientOriginalName());
+
+
+                $rendezVous->setIdVet($id);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($rendezVous);
                 $em->flush();
@@ -99,14 +118,22 @@ class RendezVousController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            /**
+             * @var UploadedFile $file
+             */
+            $file = $rendezVous->getPhotoa();
+            $file->move(
+                $this->getParameter('rdv_upload'), $file->getClientOriginalName());
+            $rendezVous->setPhotoa($file->getClientOriginalName());
+
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('r_edit', array('id' => $rendezVous->getId()));
+            return $this->redirectToRoute('r_show', array('id' => $rendezVous->getId()));
         }
 
         return $this->render('rendezvous/edit.html.twig', array(
             'rendezVous' => $rendezVous,
-            'edit_form' => $editForm->createView(),
+            'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -155,13 +182,65 @@ class RendezVousController extends Controller
             $em = $this->getDoctrine()->getManager();
 
             $rendezVouses = $em->getRepository('VeterinaireBundle:RendezVous')->rech($_GET['search']);
-
-            return $this->render('rendezvous/index.html.twig', array(
+            return $this->render('rendezvous/reche.html.twig', array(
                 'rendezVouses' => $rendezVouses,
             ));
         }else{
             return $this->redirectToRoute('user_homepage');
 
         }
+        }
+
+    public function generatePdfAction(RendezVous $rendezVous){
+        global $kernel;
+        $user = $kernel->getContainer()->get('security.token_storage')->getToken()->getUser();
+
+        $html= $this->render('vet/pdf.html.twig', array(
+            'rendezVous' => $rendezVous,
+        ));
+
+        $html2pdf = new \Spipu\Html2Pdf\Html2Pdf('P','A4','en');
+        $html2pdf->writeHTML($html->getContent());
+        $html2pdf->output($rendezVous->getTypea().'-'.$user->getFullname().'.pdf');
+
     }
+
+
+    /**
+     * Displays a form to edit an existing rendezVous entity.
+     *
+     */
+    public function edit2Action(Request $request, RendezVous $rendezVous)
+    {
+
+        global $kernel;
+        $user = $kernel->getContainer()->get('security.token_storage')->getToken()->getUser();
+
+
+        if ($user!=='anon.' && $user->getFonctionuser()==2){
+
+            $deleteForm = $this->createDeleteForm($rendezVous);
+        $editForm = $this->createForm('VeterinaireBundle\Form\confirmationType', $rendezVous);
+        $editForm->handleRequest($request);
+        $file = $rendezVous->getPhotoa();
+        if ($editForm->isSubmitted()) {
+
+            $rendezVous->setPhotoa($file);
+            $rendezVous->setVerif(true);
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('r_show', array('id' => $rendezVous->getId()));
+        }
+
+        return $this->render('rendezvous/confirmation.html.twig', array(
+            'rendezVous' => $rendezVous,
+            'form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }else{
+return $this->redirectToRoute('user_homepage');
+
+}
+
+}
 }
